@@ -1,51 +1,51 @@
-import java.util.Scanner;
-
-public class HeapSort{    
-	private static int N;
-    public static void sort(int arr[]){       
-		heapMethod(arr);        
-        for (int i = N; i > 0; i--){
-            swap(arr,0, i);
-            N = N-1;
-            heap(arr, 0);
+public class HeapSort
+{
+    public void sort(int arr[])
+    {
+        int n = arr.length;
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapify(arr, n, i);
+        for (int i=n-1; i>=0; i--)
+        {
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+            heapify(arr, i, 0);
         }
-    }     
-    public static void heapMethod(int arr[]){
-        N = arr.length-1;
-        for (int i = N/2; i >= 0; i--)
-            heap(arr, i);        
     }
-    public static void heap(int arr[], int i){ 
-        int left = 2*i ;
-        int right = 2*i + 1;
-        int max = i;
-        if (left <= N && arr[left] > arr[i])
-            max = left;
-		if (right <= N && arr[right] > arr[max])        
-            max = right;
-        if (max != i){
-            swap(arr, i, max);
-            heap(arr, max);
+    void heapify(int arr[], int n, int i)
+    {
+        int largest = i; 
+        int l = 2*i + 1; 
+        int r = 2*i + 2;  
+        if (l < n && arr[l] > arr[largest])
+            largest = l;
+        if (r < n && arr[r] > arr[largest])
+            largest = r;
+        if (largest != i)
+        {
+            int swap = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = swap;
+            heapify(arr, n, largest);
         }
-    }    
-    public static void swap(int arr[], int i, int j){
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp; 
-    }    
-    public static void main(String[] args) {
-        Scanner in = new Scanner( System.in );        
-        int n;    
-        System.out.println("Enter the number of elements to be sorted:");
-        n = in.nextInt();    
-        int arr[] = new int[ n ];
-        System.out.println("Enter "+ n +" integer elements");
-        for (int i = 0; i < n; i++)
-            arr[i] = in.nextInt();
-        sort(arr);
-        System.out.println("After sorting ");        
-        for (int i = 0; i < n; i++)
-            System.out.println(arr[i]+" ");            
-        System.out.println();            
-    }    
+    }
+    static void printArray(int arr[])
+    {
+        int n = arr.length;
+        for (int i=0; i<n; ++i)
+            System.out.print(arr[i]+" ");
+        System.out.println();
+    }
+    public static void main(String args[])
+    {
+        int arr[] = {12, 11, 13, 5, 6, 7};
+        int n = arr.length;
+ 
+        HeapSort ob = new HeapSort();
+        ob.sort(arr);
+ 
+        System.out.println("Sorted array is");
+        printArray(arr);
+    }
 }
