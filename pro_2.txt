@@ -1,0 +1,69 @@
+import java.util.*;
+
+class Node{
+	int data;
+	Node next;
+	Node(int da){
+		data=da;
+		next=null;
+	}
+}
+class Linked1{
+	Node head1;
+	Linked1(){
+		head1=null;
+	}
+	void adde(int d){
+		Node temp=new Node(d);
+		if(head1==null)
+			head1=temp;
+		else{
+			temp.next=head1;
+			head1=temp;
+		}
+	}
+	Node getHead1(){
+		return head1;
+	}
+}
+class Linked2{
+	Node head2;
+	Linked2(){
+		head2=null;
+	}
+	void adde(int d){
+		Node temp=new Node(d);
+		if(head2==null)
+			head2=temp;
+		else{
+			temp.next=head2;
+			head2=temp;
+		}
+	}
+	Node getHead2(){
+		return head2;
+	}
+}
+public class Driver{
+	public static void main(String args[]){
+		Linked1 l1=new Linked1();
+		l1.adde(10);
+		l1.adde(12);
+		l1.adde(43);
+		Linked2 l2=new Linked2();
+		l2.adde(10);
+		l2.adde(43);
+		ArrayList al=new ArrayList();
+		Node q=l1.getHead1();
+		Node z=l2.getHead2();
+		while(q!=null){
+			if(z!=null && z.data==q.data){
+				al.add(z.data);
+				z=z.next;
+			}
+			q=q.next;
+			
+		}
+		System.out.println(al); 
+	}
+}
